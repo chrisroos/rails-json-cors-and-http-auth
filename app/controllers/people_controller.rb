@@ -1,4 +1,7 @@
 class PeopleController < ApplicationController
+  before_filter :protect_with_http_basic_auth
+  before_filter :set_cors_headers
+
   # GET /people
   # GET /people.json
   def index
@@ -79,5 +82,17 @@ class PeopleController < ApplicationController
       format.html { redirect_to people_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def protect_with_http_basic_auth
+    authenticate_or_request_with_http_basic do |user_name, password|
+      user_name == 'username' && password == 'password'
+    end
+  end
+
+  def set_cors_headers
+    headers['Access-Control-Allow-Origin'] = '*'
   end
 end
