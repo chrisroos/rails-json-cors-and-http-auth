@@ -28,6 +28,7 @@ class PeopleController < ApplicationController
 
   def optionally_set_cors_headers
     return unless params[:enable_cors_headers]
-    headers['Access-Control-Allow-Origin'] = '*'
+    headers['Access-Control-Allow-Origin'] = request.headers['Origin'] if request.headers['Origin']
+    headers['Access-Control-Allow-Credentials'] = 'true'
   end
 end
