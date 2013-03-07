@@ -1,5 +1,5 @@
 class PeopleController < ApplicationController
-  before_filter :protect_with_http_basic_auth
+  before_filter :optionally_protect_with_http_basic_auth
   before_filter :set_cors_headers
 
   # GET /people
@@ -86,7 +86,8 @@ class PeopleController < ApplicationController
 
   private
 
-  def protect_with_http_basic_auth
+  def optionally_protect_with_http_basic_auth
+    return unless params[:enable_http_auth]
     authenticate_or_request_with_http_basic do |user_name, password|
       user_name == 'username' && password == 'password'
     end
