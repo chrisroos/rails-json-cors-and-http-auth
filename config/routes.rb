@@ -1,7 +1,7 @@
 RailsJsonCorsAndHttpAuth::Application.routes.draw do
   root to: 'people#index'
   resources :people
-
+  match '/people', to: 'people#options', constraints: {method: 'OPTIONS'}
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

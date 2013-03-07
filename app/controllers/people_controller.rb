@@ -1,6 +1,10 @@
 class PeopleController < ApplicationController
-  before_filter :optionally_protect_with_http_basic_auth
+  before_filter :optionally_protect_with_http_basic_auth, except: [:options]
   before_filter :optionally_set_cors_headers
+
+  def options
+    render text: ''
+  end
 
   # GET /people
   # GET /people.json
@@ -30,5 +34,6 @@ class PeopleController < ApplicationController
     return unless params[:enable_cors_headers]
     headers['Access-Control-Allow-Origin'] = request.headers['Origin'] if request.headers['Origin']
     headers['Access-Control-Allow-Credentials'] = 'true'
+    headers['Access-Control-Allow-Headers'] = request.headers['Access-Control-Request-Headers'] if request.headers['Access-Control-Request-Headers']
   end
 end
