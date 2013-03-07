@@ -1,0 +1,1 @@
+This is a simple Rails 3 app that I'm using to explore the behaviour of [CORS](http://www.w3.org/TR/cors/) and [XMLHttpRequest](https://dvcs.w3.org/hg/xhr/raw-file/tip/Overview.html), specifically `XMLHttpRequest.open` and `XMLHttpRequest.withCredentials`.
