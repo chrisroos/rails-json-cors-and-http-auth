@@ -5,7 +5,11 @@ class PeopleController < ApplicationController
   # GET /people
   # GET /people.json
   def index
-    @people = Person.all
+    person = Person.new(name: 'Chris', age: 32) do |p|
+      p.created_at = p.updated_at = Time.now
+      p.id = 1
+    end
+    @people = [person]
 
     respond_to do |format|
       format.html { redirect_to people_path(format: 'json') }
