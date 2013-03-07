@@ -6,8 +6,6 @@ class PeopleController < ApplicationController
     render text: ''
   end
 
-  # GET /people
-  # GET /people.json
   def index
     person = Person.new(name: 'Chris', age: 32) do |p|
       p.created_at = p.updated_at = Time.now
